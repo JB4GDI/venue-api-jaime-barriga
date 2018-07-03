@@ -5,24 +5,50 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: postgres
-  password: password
-  host: localhost
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
 development:
   <<: *default
-  database: db/venueApi_development
+  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/venueApi_test
+  database: db/test.sqlite3
 
 production:
   <<: *default
-  database: db/venueApi_production
+  database: db/production.sqlite3
+
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# WHEN MOVING TO PRODUCTION, UNCOMMENT BELOW, COMMENT OUT ABOVE
+# VICE VERSA WHEN MOVING TO DEV
+# ALSO SWITCH THE GEMFILE TO 'PG' FROM 'SQLITE3'
+# vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   username: postgres
+#   password: password
+#   host: localhost
+
+# development:
+#   <<: *default
+#   database: db/venueApi_development
+
+# # Warning: The database defined as "test" will be erased and
+# # re-generated from your development database when you run "rake".
+# # Do not set this db to the same as development or production.
+# test:
+#   <<: *default
+#   database: db/venueApi_test
+
+# production:
+#   <<: *default
+#   database: db/venueApi_production

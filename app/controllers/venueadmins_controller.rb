@@ -4,8 +4,8 @@ class VenueadminsController < ApplicationController
   # GET /venueadmins
   def index
     # Get all the venueadmins and order them via their email
-    venueadmins = Venueadmin.order(email: :asc)
-    json_response(venueadmins)
+    venueadmins = Venueadmin.order(email: :asc)    
+    render json: venueadmins.as_json(include: { venues: { include: {categorys: { include: :photos }}}})
   end
 
   # POST /venueadmins
@@ -16,7 +16,7 @@ class VenueadminsController < ApplicationController
 
   # GET /venueadmins/:id
   def show
-    json_response(@venueadmin)
+    render json: @venueadmin.as_json(include: { venues: { include: {categorys: { include: :photos }}}})
   end
 
   # PUT /venueadmins/:id
